@@ -1,0 +1,79 @@
+<section class="code-examples">
+  <section>
+    <h2>Levo Tooltips#1 abstraction </h2>
+<pre>
+<code data-trim class="javascript">
+(function () {
+  var toggleTooltip = function (selector, target) {
+    var toolTip = $(selector).siblings(target);
+    $(toolTip).toggle();
+  };
+  LevoLeague.toggleTooltip = toggleTooltip;
+}());
+</code>
+</pre>
+    <aside class="notes">
+      Today we'll be using a basic implentation of how to toggle tooltips on the Levo site
+      based on a basic abstraction of one way tooltips work on the Levo site to learn about Jasmine testing.
+    </aside>
+  </section>
+
+  <section>
+    <h2> Levo Slideshow on an Article page </h2>
+    <pre>
+      <code data-trim class="javascript">
+        (function(){
+
+  var SlideshowView = Backbone.View.extend({
+    el: '.js-article-slideshow-container',
+
+    startSlideshow: function () {
+      if (!this.$el.get(0)){
+        return;
+      }
+      this.arrowHover();
+      this.$('.js-article-slideshow').cycle({
+        timeout: 0,
+        next: '.js-slideshow-next',
+        prev: '.js-slideshow-prev',
+        after: this.slideshowEffects
+      });
+
+      // has to be bound after cycle because cycle stops the click event
+      this.$('.js-slideshow-next, .js-slideshow-prev').on('click', this.trackPrevNext);
+    },
+
+    slideshowEffects: function(currSlideElement, nextSlideElement, options, forwardFlag){
+      $("#js-current-image").text(options.currSlide + 1);
+      var imageCaption = $(this).data("caption");
+      $(".js-caption").text(imageCaption);
+    },
+
+    arrowHover: function() {
+      var arrows = this.$(".js-slideshow-image-arrows-container").find('.js-slideshow-next, .js-slideshow-prev');
+      this.$('.js-slideshow-image-container').on("mouseenter", function(){
+        arrows.stop(true, true).fadeIn();
+      });
+      this.$('.js-slideshow-image-container').on("mouseleave", function(){
+        arrows.stop(true, true).fadeOut();
+      });
+    },
+
+    trackPrevNext: function (e) {
+      var hidden_arrow = $(e.currentTarget).parent().hasClass("js-slideshow-image-arrows-container");
+      var data = {
+        'arrow-type': hidden_arrow ? 'on image' : 'under image'
+      };
+      LevoLeague.Tracking.track('article', 'slideshow-advance', data);
+    }
+
+
+  });
+
+  LevoLeague.SlideshowView = SlideshowView;
+
+}());
+</code>
+</pre>
+  </section>
+</section>

@@ -1,0 +1,43 @@
+<section class="s5">
+  <section class="s5a">
+    <h2> How Do I Write a Jasmine Test? </h2>
+    <aside class="notes">
+      There are 3 major componments when writing a Jasmine test:
+      Suites, Specs and Spies.
+      Jasmine Tests are comprised of Suites, Specs, Expectations: with this Matchers and Spies
+    </aside>
+  </section>
+
+  <section class="s5b">
+    <h2>Suites: "describe" Your Tests </h2>
+<pre>
+<code data-trim class="javascript">
+describe('LevoLeague.toggleTooltip', function() {
+});
+    </code></pre>
+
+      <aside class="notes">
+        Suites basically describe scenarios. These how tests begin with
+        a call to global Jasmine function 'describe' with two parameters.
+        The first portion is a string  which names are based on a componment in the app,
+        usally based on a class or function name. The second parameter is a function that implements the suite.
+
+        Suites are used to organize test specs and can contain other suites.
+  </section>
+
+  <section class="s5c">
+    <h2> Nesting describe blocks </h2>
+  <pre>
+  <code data-trim class="javascript">
+  describe('LevoLeague.toggleTooltip', function() {
+    describe("interacting with a tooltip", function() {
+    });
+  });
+  </code>
+  </pre>
+
+  <aside class="notes">Suites are executed in the order in which they are described. </aside>
+
+  </section>
+
+</section>
