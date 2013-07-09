@@ -1,0 +1,104 @@
+<!-- Headline for the upcoming section -->
+  <section>
+    <h2>Leveraging Additional Libraries</h2>
+  </section>
+
+<section class="slide10 outside-tools">
+  <section class="jasmine-jquery">
+    <h2> Introducing Jasmine-jQuery</h2>
+    <aside class="notes">jasmine-jquery provides two extensions for Jasmine JavaScript Testing Framework:
+
+a set of custom matchers for jQuery framework
+an API for handling HTML, CSS, and JSON fixtures in your specs</aside>
+  </section>
+
+  <section class="jasmine-jquery2">
+
+      <h2>Provides custom matchers for the jQuery library</h2>
+
+<pre><code data-trim class="javascript">
+
+toBe(jQuerySelector)
+toBeChecked()
+toBeEmpty()
+toBeHidden()
+toHaveCss()
+toBeSelected()
+toBeVisible()
+toContain
+toExist()
+toHaveAttr(attributeName, attributeValue)
+toHaveBeenTriggeredOn
+toHaveBeenTriggered
+</code></pre>
+
+
+<aside class="notes">Here's a few matchers that the library provides</aside>
+
+  </section>
+
+  <section>
+    <h2>Levo Example of  Jasmine jQuery matchers</h2>
+
+    <pre><code data-trim class="javascript">
+describe("clicking on a closed tooltip", function() {
+  beforeEach(function () {
+    tooltipTrigger = doc.find('#js-closed-tooltip');
+    toolTipArea = doc.find('.js-closed-tooltip-area');
+
+  });
+
+  it("should show the tooltip area", function() {
+    LevoLeague.toggleTooltip(tooltipTrigger, toolTipArea);
+    expect($(toolTipArea)).not.toBeHidden();
+  });
+});
+    </code></pre>
+  </section>
+
+  <section class="jasmine-jquery3">
+  <h2>HTML fixtures</h2>
+  <pre><code data-trim>
+    <div id="my-fixture">some complex content here</div>
+  </code></pre>
+
+  <pre><code data-trim>
+    loadFixtures('myfixture.html');
+    $('#my-fixture').myTestedPlugin();
+    expect($('#my-fixture')).to...;
+  </code></pre>
+
+  </section>
+
+  <section class="jasmine-jquery4">
+    <h2> Style Fixtures </h2>
+    <aside class="notes">
+      The StyleFixtures module is pretty much like the Fixtures module, but it allows you to load CSS content on the page while testing. It may be useful if your tests expect that certain css rules are applied to elements that you are testing.
+    </aside>
+  </section>
+
+  <section class="jasmine-jquery5">
+    <h2> JSON Fixtures </h2>
+    <aside class="notes">
+      The JSONFixtures modules allows you to load JSON data from file (instead of putting huge blocks of data in the spec files).
+    </aside>
+  </section>
+
+    <section class="jasmine-jquery6">
+    <h2> Event Spies</h2>
+      <pre><code data-trim>
+      var tooltipTrigger = '#some_element';
+       var clickEvent = spyOnEvent(tooltipTrigger, "click");
+        $(tooltipTrigger).click();
+        expect('click').toHaveBeenTriggeredOn(tooltipTrigger);
+        expect(clickEvent).toHaveBeenTriggered();
+      });
+
+      </code></pre>
+    <aside class="notes">
+      Spying on jQuery events can be done with the spyOnEvent
+    </aside>
+  </section>
+
+
+</section>
